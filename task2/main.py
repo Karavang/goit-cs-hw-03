@@ -19,6 +19,10 @@ def readAll():
     return list(data)
 
 
+def readByName(name):
+    return db.cats.find_one({"name": name})
+
+
 def deleteOne(name: str):
     db.cats.delete_one({"name": name})
     return f"{name} don't with us"
@@ -26,7 +30,7 @@ def deleteOne(name: str):
 
 def drop():
     db.cats.delete_many({})
-    return "db was dropped"
+    return "All data has been deleted from the database"
 
 
 def updateAge(name, age):
@@ -46,4 +50,4 @@ def addNewProp(name, newProp):
     return f"{name}, тепер про тебе більше інформації"
 
 
-print(readAll())
+print(readByName("barsik"))
