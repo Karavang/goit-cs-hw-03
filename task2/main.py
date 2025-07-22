@@ -1,7 +1,17 @@
 from pymongo import MongoClient
+from dotenv import load_dotenv, dotenv_values
+import os
 
-client = MongoClient("mongodb://localhost:27017/db?retryWrites=true&w=majority")
+load_dotenv()
+client = MongoClient(os.getenv("MONGO"))
 db = client.book
+# db.cats.insert_one(
+#     {
+#         "name": "barsik",
+#         "age": 3,
+#         "features": ["ходить в капці", "дає себе гладити", "рудий"],
+#     }
+# )
 
 
 def readAll():
@@ -15,7 +25,7 @@ def deleteOne(name: str):
 
 
 def drop():
-    db.cats.drop()
+    db.cats.delete_many({})
     return "db was dropped"
 
 
